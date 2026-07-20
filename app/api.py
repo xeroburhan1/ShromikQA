@@ -35,6 +35,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Global orchestrator instance
+orchestrator = None
+
 def get_orchestrator():
     global orchestrator
     if orchestrator is None:
@@ -42,6 +45,7 @@ def get_orchestrator():
         meta_path = os.path.join(base_dir, "data/processed/faiss_metadata.json")
         orchestrator = RAGOrchestrator(index_path=index_path, meta_path=meta_path)
     return orchestrator
+
 
 @app.on_event("startup")
 def startup_event():
