@@ -1103,10 +1103,19 @@
                     body: JSON.stringify({ query: query, top_k: 5 })
                 });
 
-                const data = await response.json();
+                let data;
+                const contentType = response.headers.get("content-type");
+                if (contentType && contentType.includes("application/json")) {
+                    data = await response.json();
+                } else {
+                    const rawText = await response.text();
+                    throw new Error(`Server returned HTTP ${response.status}. Please verify GROQ_API_KEY is configured in your Render environment variables.`);
+                }
+
                 if (!response.ok) {
                     throw new Error(data.detail || `API Server Error (${response.status})`);
                 }
+
 
                 clearInterval(labelInterval);
                 thinkingDiv.remove();

@@ -52,9 +52,12 @@ class FAISSRetriever:
             logger.info(f"Loaded FAISS index ({self.faiss_index.ntotal} vectors) and {len(self.metadata)} metadata records.")
 
         if self.model is None:
-            logger.info(f"Loading embedding model: {self.model_name}...")
-            self.model = SentenceTransformer(self.model_name)
-
+            try:
+                logger.info(f"Loading embedding model: {self.model_name}...")
+                self.model = SentenceTransformer(self.model_name)
+            except Exception as e:
+                logger.warning(f"Could not load SentenceTransformer ({e}). Falling back to keyword search.")
+                self.model = "keyword_fallback"
 
     def extract_section_references(self, query: str) -> list:
         """Extract explicit section numbers from raw query string."""
@@ -82,22 +85,44 @@ class FAISSRetriever:
                         override_chunk["score"] = 1.0
                         override_chunks.append(override_chunk)
                         
-        # Dense FAISS vector search
-        query_vec = self.model.encode([query], convert_to_numpy=True)
-        faiss.normalize_L2(query_vec)
-        
-        distances, indices = self.faiss_index.search(query_vec, top_k * 2)
-        
+            # If explicit section chunks exist, return immediately (instant & 0 OOM risk)
+            if override_chunks:
+                return override_chunks[:top_k]
+
+        # Dense FAISS vector search or keyword fallback
         vector_chunks = []
-        if len(indices) > 0:
-            for rank, faiss_id in enumerate(indices[0]):
-                if faiss_id < 0 or faiss_id >= len(self.metadata):
-                    continue
-                chunk = dict(self.metadata[faiss_id])
-                chunk["retrieval_source"] = "faiss_dense"
-                chunk["score"] = float(distances[0][rank])
-                vector_chunks.append(chunk)
+        if self.model != "keyword_fallback" and self.model is not None:
+            try:
+                query_vec = self.model.encode([query], convert_to_numpy=True)
+                faiss.normalize_L2(query_vec)
+                distances, indices = self.faiss_index.search(query_vec, top_k * 2)
                 
+                if len(indices) > 0:
+                    for rank, faiss_id in enumerate(indices[0]):
+                        if faiss_id < 0 or faiss_id >= len(self.metadata):
+                            continue
+                        chunk = dict(self.metadata[faiss_id])
+                        chunk["retrieval_source"] = "faiss_dense"
+                        chunk["score"] = float(distances[0][rank])
+                        vector_chunks.append(chunk)
+            except Exception as e:
+                logger.error(f"Vector search failed ({e}), falling back to keyword search.")
+
+        # Keyword match fallback if vector search yielded nothing
+        if not vector_chunks:
+            q_terms = [t.lower() for t in re.findall(r'\w+', query) if len(t) > 2]
+            scored_chunks = []
+            for chunk in self.metadata:
+                text_lower = (chunk.get("section_title", "") + " " + chunk.get("text", "")).lower()
+                matches = sum(1 for t in q_terms if t in text_lower)
+                if matches > 0:
+                    c = dict(chunk)
+                    c["retrieval_source"] = "keyword_search"
+                    c["score"] = float(matches)
+                    scored_chunks.append(c)
+            scored_chunks.sort(key=lambda x: x["score"], reverse=True)
+            vector_chunks = scored_chunks[:top_k]
+
         # Merge override + dense chunks, preserving order and removing duplicates
         combined = []
         seen_ids = set()
@@ -111,6 +136,7 @@ class FAISSRetriever:
                     break
                     
         return combined
+
 
 if __name__ == "__main__":
     retriever = FAISSRetriever()
