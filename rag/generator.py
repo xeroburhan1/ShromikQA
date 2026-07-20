@@ -40,12 +40,40 @@ def format_context(chunks: list) -> str:
         )
     return "\n".join(formatted_parts)
 
+import re
+
+GREETING_TRIGGERS = [
+    "hi", "hello", "hey", "greetings", "good morning", "good afternoon", "good evening",
+    "who are you", "what are you", "what can you do", "help", "thanks", "thank you",
+    "assalamu alaikum", "salam", "slm", "hey there", "hi there"
+]
+
+def is_conversational_query(query: str) -> bool:
+    q = query.strip().lower().rstrip("!?.,")
+    if q in GREETING_TRIGGERS or any(q.startswith(g) for g in ["hi ", "hello ", "hey ", "good morning", "good evening", "assalamu"]):
+        return True
+    return False
+
+def get_conversational_response(user_question: str) -> str:
+    return (
+        "**Direct Answer:** Hello! I am **Shromik QA**, your authoritative AI assistant for the **Bangladesh Labour Act 2006** (including amendments up to 2018 and Labour Rules 2015).\n\n"
+        "**Relevant Section(s):** Bangladesh Labour Act 2006 Statutory Corpus\n\n"
+        "**Explanation:** How can I assist you today? I am trained to provide precise, grounded legal answers strictly based on statutory law. You can ask me queries such as:\n"
+        "• *What is the notice period for terminating a permanent worker under Section 27?*\n"
+        "• *What are maximum daily working hours for an adult worker under Section 100?*\n"
+        "• *How is annual leave with wages calculated under Section 117?*\n"
+        "• *What is the procedure for submitting a written grievance complaint under Section 33?*\n\n"
+        "**Disclaimer:** This is general informational guidance based strictly on the Bangladesh Labour Act 2006 statutory text, not official legal advice."
+    )
+
 def generate_answer(retrieved_chunks: list, user_question: str) -> str:
     """
-    Generates an answer using the configured LLM API provider (Anthropic, Gemini, or OpenAI).
-    Defaults to Anthropic API as requested by prompt.
+    Generates an answer using the configured LLM API provider (Anthropic, Gemini, OpenAI, or Groq).
     """
     load_dotenv(override=True)
+
+    if is_conversational_query(user_question):
+        return get_conversational_response(user_question)
     
     if not retrieved_chunks:
         return (
@@ -54,6 +82,7 @@ def generate_answer(retrieved_chunks: list, user_question: str) -> str:
             "**Explanation:** No context was retrieved from the statutory database to verify this query.\n\n"
             "**Disclaimer:** This is general informational guidance based strictly on the Bangladesh Labour Act 2006 statutory text, not official legal advice."
         )
+
         
     context_text = format_context(retrieved_chunks)
     user_prompt = USER_PROMPT_TEMPLATE.format(context_text=context_text, user_question=user_question)
