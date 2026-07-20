@@ -31,30 +31,30 @@ class FAISSRetriever:
         self.section_map = {}
         
     def _lazy_load(self):
-        if self.faiss_index is not None:
-            return
-            
-        logger.info(f"Loading FAISS index from {self.index_path}...")
-        if not os.path.exists(self.index_path) or not os.path.exists(self.meta_path):
-            raise FileNotFoundError("FAISS index or metadata missing. Run python index/build_faiss_index.py first.")
-            
-        self.faiss_index = faiss.read_index(self.index_path)
-        
-        with open(self.meta_path, 'r', encoding='utf-8') as f:
-            self.metadata = json.load(f)
-            
-        # Build O(1) map of section number -> list of chunk objects
-        for item in self.metadata:
-            sec_num = str(item.get("section_number", "")).strip()
-            if sec_num:
-                if sec_num not in self.section_map:
-                    self.section_map[sec_num] = []
-                self.section_map[sec_num].append(item)
+        if self.faiss_index is None:
+            logger.info(f"Loading FAISS index from {self.index_path}...")
+            if not os.path.exists(self.index_path) or not os.path.exists(self.meta_path):
+                raise FileNotFoundError("FAISS index or metadata missing. Run python index/build_faiss_index.py first.")
                 
-        logger.info(f"Loaded FAISS index ({self.faiss_index.ntotal} vectors) and {len(self.metadata)} metadata records.")
-        
-        logger.info(f"Loading embedding model: {self.model_name}...")
-        self.model = SentenceTransformer(self.model_name)
+            self.faiss_index = faiss.read_index(self.index_path)
+            
+            with open(self.meta_path, 'r', encoding='utf-8') as f:
+                self.metadata = json.load(f)
+                
+            self.section_map = {}
+            for item in self.metadata:
+                sec_num = str(item.get("section_number", "")).strip()
+                if sec_num:
+                    if sec_num not in self.section_map:
+                        self.section_map[sec_num] = []
+                    self.section_map[sec_num].append(item)
+                    
+            logger.info(f"Loaded FAISS index ({self.faiss_index.ntotal} vectors) and {len(self.metadata)} metadata records.")
+
+        if self.model is None:
+            logger.info(f"Loading embedding model: {self.model_name}...")
+            self.model = SentenceTransformer(self.model_name)
+
 
     def extract_section_references(self, query: str) -> list:
         """Extract explicit section numbers from raw query string."""
