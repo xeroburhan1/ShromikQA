@@ -35,16 +35,21 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Global orchestrator instance
-orchestrator = None
+def get_orchestrator():
+    global orchestrator
+    if orchestrator is None:
+        index_path = os.path.join(base_dir, "data/processed/faiss_index.bin")
+        meta_path = os.path.join(base_dir, "data/processed/faiss_metadata.json")
+        orchestrator = RAGOrchestrator(index_path=index_path, meta_path=meta_path)
+    return orchestrator
 
 @app.on_event("startup")
 def startup_event():
-    global orchestrator
-    index_path = os.path.join(base_dir, "data/processed/faiss_index.bin")
-    meta_path = os.path.join(base_dir, "data/processed/faiss_metadata.json")
-    orchestrator = RAGOrchestrator(index_path=index_path, meta_path=meta_path)
-    logger.info("RAG Orchestrator initialized for FastAPI server.")
+    try:
+        get_orchestrator()
+        logger.info("RAG Orchestrator initialized for FastAPI server.")
+    except Exception as e:
+        logger.error(f"Error initializing RAG Orchestrator on startup: {e}")
 
 class ChatRequest(BaseModel):
     query: str
@@ -55,17 +60,23 @@ def chat_endpoint(req: ChatRequest):
     if not req.query or not req.query.strip():
         raise HTTPException(status_code=400, detail="Query cannot be empty.")
         
-    start_time = time.time()
-    res = orchestrator.answer_question(req.query.strip(), top_k=req.top_k)
-    elapsed_ms = int((time.time() - start_time) * 1000)
-    
-    return {
-        "query": res["query"],
-        "answer": res["answer"],
-        "retrieved_chunks": res["retrieved_chunks"],
-        "num_chunks": len(res["retrieved_chunks"]),
-        "execution_time_ms": elapsed_ms
-    }
+    try:
+        orch = get_orchestrator()
+        start_time = time.time()
+        res = orch.answer_question(req.query.strip(), top_k=req.top_k)
+        elapsed_ms = int((time.time() - start_time) * 1000)
+        
+        return {
+            "query": res["query"],
+            "answer": res["answer"],
+            "retrieved_chunks": res["retrieved_chunks"],
+            "num_chunks": len(res["retrieved_chunks"]),
+            "execution_time_ms": elapsed_ms
+        }
+    except Exception as e:
+        logger.error(f"Error processing query: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 
 @app.get("/api/health")
 def health():

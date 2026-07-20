@@ -941,16 +941,19 @@
                     body: JSON.stringify({ query: query, top_k: 5 })
                 });
 
-                if (!response.ok) throw new Error('API server error');
                 const data = await response.json();
+                if (!response.ok) {
+                    throw new Error(data.detail || `API Server Error (${response.status})`);
+                }
 
                 appendMessageToDOM('assistant', data.answer, data.retrieved_chunks, data.execution_time_ms);
                 saveCurrentSession('assistant', data.answer, data.retrieved_chunks, data.execution_time_ms);
             } catch (err) {
-                const errText = '⚠️ Error connecting to RAG server. Ensure backend is running at http://127.0.0.1:8000';
+                const errText = `⚠️ ${err.message}\n\n*Please ensure GROQ_API_KEY is set under Environment Variables in your Render dashboard.*`;
                 appendMessageToDOM('assistant', errText);
                 saveCurrentSession('assistant', errText);
             } finally {
+
                 sendBtn.disabled = false;
                 sendBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>';
             }
