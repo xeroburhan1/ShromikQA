@@ -1,0 +1,38 @@
+[
+  {
+    "filename": "labour_act_2006_en.pdf",
+    "title": "The Bangladesh Labour Act, 2006 (XLII of 2006)",
+    "law_version_date": "2006-10-11",
+    "amendments_included_through": "2006",
+    "language": "en",
+    "source_url": "https://www.doulah.net/bdlaws/Bangladesh%20Labor%20Act,%202006.pdf",
+    "source_type": "primary"
+  },
+  {
+    "filename": "labour_act_2006_en_mcci.pdf",
+    "title": "The Bangladesh Labour Act, 2006 (English Upto 2018)",
+    "law_version_date": "2018-10-24",
+    "amendments_included_through": "2018",
+    "language": "en",
+    "source_url": "https://mccibd.org/wp-content/uploads/2021/09/Bangladesh-Labour-Act-2006_English-Upto-2018.pdf",
+    "source_type": "primary"
+  },
+  {
+    "filename": "labour_act_2006_natlex.pdf",
+    "title": "Bangladesh Labour Act, 2006 (ILO NATLEX version)",
+    "law_version_date": "2006-10-11",
+    "amendments_included_through": "2006",
+    "language": "en",
+    "source_url": "https://natlex.ilo.org/dyn/natlex2/natlex2/files/download/76402/BGD76402.pdf",
+    "source_type": "primary"
+  },
+  {
+    "filename": "labour_act_2006_bn.html",
+    "title": "Bangladesh Labour Act, 2006 (Bangla, Minlaw bdlaws)",
+    "law_version_date": "2006-10-11",
+    "amendments_included_through": "2018",
+    "language": "bn",
+    "source_url": "http://bdlaws.minlaw.gov.bd/act-952.html",
+    "source_type": "primary"
+  }
+]

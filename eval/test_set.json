@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "topic": "Termination Notice",
+    "question": "What is the notice period for terminating a permanent worker under Section 27?",
+    "expected_section": "27",
+    "expected_answer_summary": "A permanent worker must give 60 days notice in writing to terminate employment."
+  },
+  {
+    "id": 2,
+    "topic": "Termination Notice",
+    "question": "What is the notice period required for an employer to terminate a permanent worker under Section 26?",
+    "expected_section": "26",
+    "expected_answer_summary": "An employer must give 120 days notice for monthly rated workers or 60 days notice for other workers."
+  },
+  {
+    "id": 3,
+    "topic": "Working Hours",
+    "question": "What are maximum daily working hours for an adult worker under Section 100?",
+    "expected_section": "100",
+    "expected_answer_summary": "No adult worker shall ordinarily be required or allowed to work in an establishment for more than 8 hours in any day."
+  },
+  {
+    "id": 4,
+    "topic": "Working Hours",
+    "question": "How is overtime payment calculated under Section 108?",
+    "expected_section": "108",
+    "expected_answer_summary": "Overtime work entitles a worker to allowance at the rate of twice his ordinary rate of basic wage."
+  },
+  {
+    "id": 5,
+    "topic": "Leave Entitlement",
+    "question": "How many days of casual leave is a worker entitled to in a calendar year under Section 115?",
+    "expected_section": "115",
+    "expected_answer_summary": "Every worker shall be entitled to casual leave with full wages for 10 days in a calendar year."
+  },
+  {
+    "id": 6,
+    "topic": "Leave Entitlement",
+    "question": "How is annual leave with wages calculated for adult workers in a factory under Section 117?",
+    "expected_section": "117",
+    "expected_answer_summary": "Every adult worker who has completed one year of continuous service is entitled to annual leave at the rate of one day for every 18 days of work."
+  },
+  {
+    "id": 7,
+    "topic": "Wages",
+    "question": "Within how many days after the expiry of the wage period must wages be paid under Section 120?",
+    "expected_section": "120",
+    "expected_answer_summary": "Wages of a worker shall be paid before the expiry of the seventh day after the last day of the wage period."
+  },
+  {
+    "id": 8,
+    "topic": "Wages",
+    "question": "What are permissible deductions from wages under Section 125?",
+    "expected_section": "125",
+    "expected_answer_summary": "Deductions may be made for fines, absence from duty, damage to goods, accommodation, or provident fund contributions."
+  },
+  {
+    "id": 9,
+    "topic": "Dispute Procedure",
+    "question": "What is the procedure for an aggrieved worker to submit a written complaint to the employer under Section 33?",
+    "expected_section": "33",
+    "expected_answer_summary": "The worker must submit the grievance in writing to the employer within 30 days of the cause of grievance."
+  },
+  {
+    "id": 10,
+    "topic": "Dispute Procedure",
+    "question": "Who may raise an industrial dispute under Section 209?",
+    "expected_section": "209",
+    "expected_answer_summary": "An industrial dispute may be raised by an employer or a collective bargaining agent."
+  }
+]

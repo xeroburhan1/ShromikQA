@@ -1,0 +1,89 @@
+id,topic,question,expected_section,recall_1,recall_3,recall_5,mrr,cites_expected_section,has_grounding_context,unhallucinated_score,generated_answer
+1,Termination Notice,What is the notice period for terminating a permanent worker under Section 27?,27,1.0,1.0,1.0,1.0,True,True,1.0,"**Direct Answer:** The notice period for terminating a permanent worker under Section 27 is 60 days in writing. 
+**Relevant Section(s):** 
+- Section 27(1) of the Bangladesh Labour Act 2006.
+**Explanation:** According to Section 27(1) of the Bangladesh Labour Act 2006, a permanent worker may resign his service by giving the employer 60 (sixty) days notice in writing. Additionally, Section 27(3) states that if a worker intends to resign without notice, they may do so by paying the employer an amount equal to the wages for the period of notice. 
+**Disclaimer:** This is general informational guidance based strictly on the Bangladesh Labour Act 2006 statutory text, not official legal advice."
+2,Termination Notice,What is the notice period required for an employer to terminate a permanent worker under Section 26?,26,1.0,1.0,1.0,1.0,True,True,1.0,"**Direct Answer:** The notice period required for an employer to terminate a permanent worker under Section 26 is 120 days for monthly rated workers and 60 days for other workers. 
+**Relevant Section(s):** 
+- Section 26(1)(a) 
+- Section 26(1)(b)
+**Explanation:** According to Section 26(1) of the Bangladesh Labour Act 2006, the employment of a permanent worker may be terminated by an employer by giving a notice in writing. Specifically, for monthly rated workers, the notice period is 120 days as stated in Section 26(1)(a), and for other workers, the notice period is 60 days as stated in Section 26(1)(b).
+**Disclaimer:** This is general informational guidance based strictly on the Bangladesh Labour Act 2006 statutory text, not official legal advice."
+3,Working Hours,What are maximum daily working hours for an adult worker under Section 100?,100,1.0,1.0,1.0,1.0,True,True,1.0,"**Direct Answer:** The maximum daily working hours for an adult worker under Section 100 is 8 hours, but may be extended up to 10 hours subject to the provisions of Section 108. 
+**Relevant Section(s):** 
+* Section 100
+* Section 108
+**Explanation:** According to Section 100, no adult worker shall ordinarily work or be required to work in an establishment for more than 8 hours in a day. However, it is also stated that subject to the provisions of Section 108, any such worker may work in an establishment up to 10 hours also in a day. 
+**Disclaimer:** This is general informational guidance based strictly on the Bangladesh Labour Act 2006 statutory text, not official legal advice."
+4,Working Hours,How is overtime payment calculated under Section 108?,108,1.0,1.0,1.0,1.0,True,True,1.0,"**Direct Answer:** Overtime payment is calculated at the rate of twice the ordinary rate of basic wage and dearness allowance and ad-hoc or interim wage, if any, as per Section 108(1) of the Bangladesh Labour Act 2006. This provision does not apply to piece-rate workers as stated in Section 108(2).
+
+**Relevant Section(s):**
+- Section 108(1)
+- Section 108(2)
+- Section 108(3)
+
+**Explanation:** According to Section 108(1), a worker is entitled to an allowance for overtime work at the rate of twice his ordinary rate of basic wage and dearness allowance and ad-hoc or interim wage, if any. However, as clarified in Section 108(2), this provision does not apply to piece-rate workers. Furthermore, Section 108(3) mentions that the Government may prescribe, by rules, the register to be maintained by an establishment to ensure compliance with the provisions of this section, implying a mechanism for tracking and verifying overtime work and payments.
+
+**Disclaimer:** This is general informational guidance based strictly on the Bangladesh Labour Act 2006 statutory text, not official legal advice."
+5,Leave Entitlement,How many days of casual leave is a worker entitled to in a calendar year under Section 115?,115,1.0,1.0,1.0,1.0,True,True,1.0,"**Direct Answer:** A worker is entitled to 10 days of casual leave with full wages in a calendar year under Section 115. This leave cannot be accumulated or carried forward to the succeeding year.
+
+**Relevant Section(s):** 
+- Section 115: Casual leave
+
+**Explanation:** According to Section 115, every worker shall be entitled to casual leave for 10 days with full wages in a calendar year. It is also specified that if such leave is not availed for any reason, it shall not be accumulated and the leave of any year shall not be availed in the succeeding year. However, this provision does not apply to workers employed in a tea plantation.
+
+**Disclaimer:** This is general informational guidance based strictly on the Bangladesh Labour Act 2006 statutory text, not official legal advice."
+6,Leave Entitlement,How is annual leave with wages calculated for adult workers in a factory under Section 117?,117,1.0,1.0,1.0,1.0,True,True,1.0,"**Direct Answer:** Annual leave with wages for adult workers in a factory is calculated at the rate of 1 day for every 18 days of work, as per Section 117(1)(a) of the Bangladesh Labour Act 2006. 
+**Relevant Section(s):** 
+- Section 117(1)(a) 
+- Section 117(8) 
+**Explanation:** According to Section 117(1)(a), every adult worker who has completed 1 year of continuous service in a factory shall be allowed leave with wages for days calculated on the basis of the works of the preceding 12 months at the rate of 1 day for every 18 days of work. Section 117(8) clarifies that a worker shall be deemed to have completed a period of continuous service in an establishment notwithstanding any interruption in service during that period due to various reasons such as holidays, leave with wages, or sickness. 
+**Disclaimer:** This is general informational guidance based strictly on the Bangladesh Labour Act 2006 statutory text, not official legal advice."
+7,Wages,Within how many days after the expiry of the wage period must wages be paid under Section 120?,120,1.0,1.0,1.0,1.0,True,True,1.0,"**Direct Answer:** The wages must be paid before the expiry of the seventh working day following the last day of the wage period, as per Section 123, not Section 120. Section 120 only defines what constitutes wages.
+
+**Relevant Section(s):** 
+- Section 120: Special definition of wages
+- Section 123: Time of payment of wages
+
+**Explanation:** Section 120 provides a special definition of wages, which includes various dues such as bonus, remuneration for leave or holiday, and sums payable due to lay-off or suspension. However, it does not specify the time frame for payment of wages. The time of payment of wages is specified in Section 123, which states that wages shall be paid before the expiry of the seventh working day following the last day of the wage period.
+
+**Disclaimer:** This is general informational guidance based strictly on the Bangladesh Labour Act 2006 statutory text, not official legal advice."
+8,Wages,What are permissible deductions from wages under Section 125?,125,1.0,1.0,1.0,1.0,True,True,1.0,"**Direct Answer:** Permissible deductions from wages under Section 125 include fines, unauthorized absence, damage or loss, house-accommodation, facilities and services, recovery of advances or loans, income-tax, court-ordered deductions, and others as specified. These deductions are subject to specific conditions and limitations as outlined in the Act.
+
+**Relevant Section(s):** 
+- Section 125
+- Section 127
+- Section 128
+- Section 129
+- Section 130
+
+**Explanation:** 
+Section 125(2) of the Bangladesh Labour Act 2006 lists the permissible deductions from wages, which include:
+- Fines imposed under Section 25 (Section 125(2)(a))
+- Deductions for unauthorized absence from duty (Section 125(2)(b))
+- Deductions for damage to or loss of goods given under the custody of a worker (Section 125(2)(c))
+- Deductions for house-accommodation provided by the employer (Section 125(2)(d))
+- Deductions for facilities and services approved by the Government (Section 125(2)(e))
+- Deductions for recovery of advances or loans or adjustment of overpayments of wages (Section 125(2)(f))
+- Deductions of income-tax payable by the worker (Section 125(2)(g))
+- Deductions by order of a Court or any competent authority (Section 125(2)(h))
+- Deductions for subscriptions to and for payment of advances from any provident fund (Section 125(2)(i))
+- Deductions for payment to any co-operative society approved by the Government (Section 125(2)(j))
+- Deductions made with the written consent of the workers for the contribution to any fund or scheme (Section 125(2)(k))
+- Deduction of subscription for the CBA Union through check-off system (Section 125(2)(l))
+
+These deductions are further regulated by other sections of the Act, such as Section 127 for deductions due to damage or loss, Section 128 for deductions related to services rendered, Section 129 for recovery of loans or advances, and Section 130 for other specific deductions.
+
+**Disclaimer:** This is general informational guidance based strictly on the Bangladesh Labour Act 2006 statutory text, not official legal advice."
+9,Dispute Procedure,What is the procedure for an aggrieved worker to submit a written complaint to the employer under Section 33?,33,1.0,1.0,1.0,1.0,True,True,1.0,"**Direct Answer:** An aggrieved worker must submit a written complaint to the employer within 30 days of being informed of the cause of the complaint, which can be sent by registered post or directly accepted by the appointing authority with a written acknowledgement. 
+**Relevant Section(s):** 
+- Section 33(1) of the Bangladesh Labour Act 2006.
+**Explanation:** 
+As per Section 33(1), any worker who has a complaint under this Chapter must send it in writing to the employer by registered post within 30 days of being informed of the cause of the complaint. However, if the appointing authority accepts the complaint directly and acknowledges the receipt in writing, the complaint does not need to be sent by registered post. The employer is then required to make an enquiry into the complaint, give the worker an opportunity to be heard, and communicate the decision in writing within 30 days of receiving the complaint, as stated in Section 33(2).
+**Disclaimer:** This is general informational guidance based strictly on the Bangladesh Labour Act 2006 statutory text, not official legal advice."
+10,Dispute Procedure,Who may raise an industrial dispute under Section 209?,209,1.0,1.0,1.0,1.0,True,True,1.0,"**Direct Answer:** An industrial dispute may be raised by an employer or by a collective bargaining agent, as per Section 209. 
+**Relevant Section(s):** 
+- Section 209
+**Explanation:** According to Section 209, ""No industrial dispute shall be deemed to exist, unless it is raised by an employer or by a collective bargaining agent in accordance with the provisions of this Chapter."" This indicates that the initiation of an industrial dispute is specifically reserved for these two entities.
+**Disclaimer:** This is general informational guidance based strictly on the Bangladesh Labour Act 2006 statutory text, not official legal advice."

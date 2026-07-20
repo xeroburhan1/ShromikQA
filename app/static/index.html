@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shromik QA — Bangladesh Labour Act RAG</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #050506;
+            --bg-surface: #0E0E11;
+            --bg-surface-hover: #16161C;
+            --border-color: #27272A;
+            --border-highlight: #3F3F46;
+            --accent-green: #22C55E;
+            --accent-cyan: #06B6D4;
+            --accent-indigo: #818CF8;
+            --accent-glow: rgba(34, 197, 94, 0.3);
+            --text-main: #FAFAFA;
+            --text-sub: #A1A1AA;
+            --text-dim: #71717A;
+            --font-head: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        /* STRICT MINIMAL SQUARE ELEMENT RESET (NO ROUNDED CORNERS) */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            border-radius: 0 !important;
+        }
+
+        html, body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+            background-image: 
+                linear-gradient(to right, rgba(39, 39, 42, 0.25) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(39, 39, 42, 0.25) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* Custom Dark Minimal Scrollbar */
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050506;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #27272A;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-green);
+        }
+
+        body {
+            display: flex;
+        }
+
+        /* Sidebar Styling - Sharp Minimal */
+        .sidebar {
+            width: 280px;
+            height: 100vh;
+            background: var(--bg-surface);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            transition: margin-left 0.25s ease;
+            z-index: 100;
+            flex-shrink: 0;
+        }
+
+        .sidebar.collapsed {
+            margin-left: -280px;
+        }
+
+        .sidebar-brand-box {
+            padding: 16px;
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #09090B;
+            transition: background 0.15s ease;
+        }
+
+        .sidebar-brand-box:hover {
+            background: #141418;
+        }
+
+        /* AI + Labour Concept Logo Container */
+        .brand-logo-sq {
+            width: 32px;
+            height: 32px;
+            background: #000000;
+            border: 1px solid var(--accent-green);
+            color: var(--accent-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 12px var(--accent-glow);
+            flex-shrink: 0;
+        }
+
+        .brand-name {
+            font-family: var(--font-head);
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -0.03em;
+            text-transform: uppercase;
+        }
+
+        .brand-sub {
+            font-size: 0.65rem;
+            font-family: var(--font-mono);
+            color: var(--accent-green);
+            letter-spacing: 0.05em;
+        }
+
+        .new-chat-btn {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 10px;
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            margin: 12px 14px 8px 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .new-chat-btn:hover {
+            background: var(--accent-green);
+            color: #000000;
+            border-color: var(--accent-green);
+        }
+
+        .history-label {
+            font-size: 0.68rem;
+            font-family: var(--font-mono);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-dim);
+            padding: 12px 16px 4px 16px;
+        }
+
+        .history-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0 10px 12px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .history-item {
+            padding: 8px 10px;
+            background: transparent;
+            border: 1px solid transparent;
+            font-size: 0.82rem;
+            color: var(--text-sub);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.15s ease;
+        }
+
+        .history-item:hover {
+            background: var(--bg-surface-hover);
+            border-color: var(--border-color);
+            color: var(--text-main);
+        }
+
+        .history-item.active {
+            background: rgba(34, 197, 94, 0.08);
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+
+        .history-icon {
+            color: var(--text-dim);
+            flex-shrink: 0;
+        }
+
+        .history-item.active .history-icon {
+            color: var(--accent-green);
+        }
+
+        .history-text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            flex: 1;
+        }
+
+        .del-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-dim);
+            cursor: pointer;
+            padding: 2px 4px;
+            opacity: 0;
+            transition: opacity 0.15s;
+        }
+
+        .history-item:hover .del-btn {
+            opacity: 1;
+        }
+
+        .del-btn:hover {
+            color: #EF4444;
+        }
+
+        /* Main Workspace Wrapper */
+        .main-wrapper {
+            flex: 1;
+            height: 100vh;
+            overflow-y: auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 900px;
+            padding: 16px 20px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 18px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            margin-bottom: 20px;
+            flex-shrink: 0;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .toggle-btn {
+            background: #000000;
+            border: 1px solid var(--border-color);
+            color: var(--text-sub);
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .toggle-btn:hover {
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+        }
+
+        .nav-brand-tap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .nav-brand-tap:hover .nav-title {
+            color: var(--accent-green);
+        }
+
+        .nav-title {
+            font-family: var(--font-head);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+        }
+
+        .status-tag {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(34, 197, 94, 0.06);
+            border: 1px solid rgba(34, 197, 94, 0.25);
+            color: var(--accent-green);
+            font-size: 0.74rem;
+            font-family: var(--font-mono);
+            padding: 5px 12px;
+            font-weight: 600;
+        }
+
+        .pulse-sq {
+            width: 6px;
+            height: 6px;
+            background-color: var(--accent-green);
+            box-shadow: 0 0 8px var(--accent-green);
+            animation: pulseSq 2s infinite;
+        }
+
+        @keyframes pulseSq {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+
+        /* Content Area */
+        .content-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* HERO WITH 3D EMBLEM AI+LABOUR LOGO (REPLACED GENERIC SPHERE) */
+        .hero {
+            text-align: center;
+            padding: 20px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .emblem-stage {
+            width: 90px;
+            height: 90px;
+            margin-bottom: 20px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 800px;
+        }
+
+        .emblem-3d-box {
+            width: 70px;
+            height: 70px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotateEmblem 10s linear infinite;
+        }
+
+        @keyframes rotateEmblem {
+            0% { transform: rotateX(10deg) rotateY(0deg); }
+            100% { transform: rotateX(10deg) rotateY(360deg); }
+        }
+
+        .emblem-frame {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 1.5px solid var(--accent-green);
+            box-shadow: 0 0 16px var(--accent-glow);
+            background: rgba(14, 14, 17, 0.6);
+        }
+
+        .emblem-frame:nth-child(1) { transform: rotateY(0deg); }
+        .emblem-frame:nth-child(2) { transform: rotateY(60deg); }
+        .emblem-frame:nth-child(3) { transform: rotateY(120deg); }
+
+        .emblem-center-logo {
+            position: absolute;
+            width: 38px;
+            height: 38px;
+            background: #000000;
+            border: 1px solid var(--accent-green);
+            color: var(--accent-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 24px var(--accent-green);
+            z-index: 10;
+        }
+
+        .hero-tag {
+            font-family: var(--font-mono);
+            font-size: 0.74rem;
+            color: var(--accent-green);
+            background: rgba(34, 197, 94, 0.08);
+            border: 1px solid rgba(34, 197, 94, 0.25);
+            padding: 4px 14px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .hero-title {
+            font-family: var(--font-head);
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .hero-title span {
+            color: var(--accent-green);
+            background: linear-gradient(135deg, #22C55E 0%, #86EFAC 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 0.96rem;
+            color: var(--text-sub);
+            max-width: 600px;
+            line-height: 1.55;
+            margin-bottom: 24px;
+        }
+
+        /* Minimal Prompt Grid */
+        .prompt-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            width: 100%;
+        }
+
+        .prompt-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            padding: 16px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            position: relative;
+        }
+
+        .prompt-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: transparent;
+            transition: background 0.15s ease;
+        }
+
+        .prompt-card:hover {
+            background: var(--bg-surface-hover);
+            border-color: var(--border-highlight);
+            transform: translateY(-2px);
+        }
+
+        .prompt-card:hover::before {
+            background: var(--accent-green);
+        }
+
+        .prompt-card-header {
+            font-family: var(--font-head);
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .prompt-card-desc {
+            font-size: 0.78rem;
+            color: var(--text-dim);
+            line-height: 1.4;
+        }
+
+        /* Chat Feed */
+        .chat-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .chat-msg {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            animation: slideUp 0.2s ease-out;
+            line-height: 1.6;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .chat-msg-user {
+            background: #000000;
+            border-color: var(--border-highlight);
+            border-left: 3px solid var(--accent-indigo);
+        }
+
+        /* Modern User & Assistant Role Badges */
+        .msg-role {
+            font-family: var(--font-mono);
+            font-size: 0.76rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .role-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            font-size: 0.74rem;
+            font-weight: 700;
+            border-radius: 0;
+        }
+
+        .user-pill {
+            background: rgba(129, 140, 248, 0.12);
+            color: var(--accent-indigo);
+            border: 1px solid rgba(129, 140, 248, 0.3);
+        }
+
+        .assistant-pill {
+            background: rgba(34, 197, 94, 0.12);
+            color: var(--accent-green);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .latency-tag {
+            color: var(--text-dim);
+            font-size: 0.74rem;
+            font-family: var(--font-mono);
+        }
+
+        .msg-content {
+            font-size: 0.98rem;
+            color: #F4F4F5;
+            white-space: pre-wrap;
+        }
+
+        .sec-badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(34, 197, 94, 0.12);
+            color: var(--accent-green);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            font-size: 0.76rem;
+            font-weight: 700;
+            padding: 2px 7px;
+            font-family: var(--font-mono);
+            margin-right: 6px;
+        }
+
+        .chunks-expander {
+            margin-top: 16px;
+            border: 1px solid var(--border-color);
+            background: #000000;
+        }
+
+        .expander-header {
+            padding: 10px 14px;
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-sub);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #111115;
+            user-select: none;
+        }
+
+        .expander-header:hover {
+            color: var(--accent-green);
+        }
+
+        .expander-body {
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .chunk-box {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            font-size: 0.82rem;
+            color: #D4D4D8;
+            font-family: var(--font-mono);
+            line-height: 1.5;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        /* Sticky Input Bar */
+        .input-bar {
+            position: sticky;
+            bottom: 0;
+            width: 100%;
+            background: #0E0E11;
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 16px 40px rgba(0,0,0,0.8);
+            margin-top: auto;
+        }
+
+        .input-bar:focus-within {
+            border-color: var(--accent-green);
+        }
+
+        .input-field {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--text-main);
+            font-family: var(--font-body);
+            font-size: 0.98rem;
+            padding: 6px 4px;
+            resize: none;
+            height: 40px;
+            max-height: 120px;
+        }
+
+        .send-btn {
+            background: var(--accent-green);
+            color: #000000;
+            border: none;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: 800;
+            transition: all 0.15s ease;
+            flex-shrink: 0;
+        }
+
+        .send-btn:hover {
+            background: #4ADE80;
+            box-shadow: 0 0 16px var(--accent-glow);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(0,0,0,0.2);
+            border-top-color: #000;
+            animation: spin 0.6s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Minimal Square Sidebar with Chat History -->
+    <aside class="sidebar" id="sidebar">
+        <!-- AI + Labour Concept Logo -->
+        <div class="sidebar-brand-box" onclick="startNewChat()" title="Click to start New Chat (Shromik QA)">
+            <div class="brand-logo-sq">
+                <!-- AI + Labour Balance Scale SVG Icon -->
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"><line x1="12" y1="3" x2="12" y2="21"></line><line x1="4" y1="7" x2="20" y2="7"></line><path d="M4 7L2 13H6L4 7Z"></path><path d="M20 7L18 13H22L20 7Z"></path><circle cx="12" cy="7" r="2" fill="currentColor"></circle></svg>
+            </div>
+            <div>
+                <div class="brand-name">Shromik QA</div>
+                <div class="brand-sub">LABOUR ACT RAG v2.0</div>
+            </div>
+        </div>
+        <button class="new-chat-btn" onclick="startNewChat()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            <span>NEW CHAT SESSION</span>
+        </button>
+        <div class="history-label">[ RECENT DISCUSSIONS ]</div>
+        <div class="history-list" id="historyList"></div>
+    </aside>
+
+    <!-- Main Workspace Container -->
+    <div class="main-wrapper" id="mainWrapper">
+        <div class="app-container">
+            <!-- Navbar -->
+            <nav class="navbar">
+                <div class="nav-left">
+                    <button class="toggle-btn" onclick="toggleSidebar()" title="Toggle Sidebar">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>
+                    </button>
+                    <!-- Brand Tap Logo on Navbar redirect to New Chat -->
+                    <div class="nav-brand-tap" onclick="startNewChat()" title="Click to reset and start New Chat">
+                        <div class="brand-logo-sq" style="width: 24px; height: 24px;">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"><line x1="12" y1="3" x2="12" y2="21"></line><line x1="4" y1="7" x2="20" y2="7"></line><path d="M4 7L2 13H6L4 7Z"></path><path d="M20 7L18 13H22L20 7Z"></path><circle cx="12" cy="7" r="2" fill="currentColor"></circle></svg>
+                        </div>
+                        <span class="nav-title">SHROMIK QA</span>
+                    </div>
+                </div>
+                <div class="status-tag">
+                    <div class="pulse-sq"></div>
+                    <span>FAISS INDEX ACTIVE (374 SECTIONS)</span>
+                </div>
+            </nav>
+
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- HERO WITH 3D EMBLEM AI+LABOUR LOGO -->
+                <div class="hero" id="heroArea">
+                    <div class="emblem-stage">
+                        <div class="emblem-3d-box">
+                            <div class="emblem-frame"></div>
+                            <div class="emblem-frame"></div>
+                            <div class="emblem-frame"></div>
+                        </div>
+                        <div class="emblem-center-logo">
+                            <!-- AI + Labour Scale SVG Icon -->
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"><line x1="12" y1="3" x2="12" y2="21"></line><line x1="4" y1="7" x2="20" y2="7"></line><path d="M4 7L2 13H6L4 7Z"></path><path d="M20 7L18 13H22L20 7Z"></path><circle cx="12" cy="7" r="2" fill="currentColor"></circle></svg>
+                        </div>
+                    </div>
+
+                    <div class="hero-tag">⚡ STATUTORY GROUNDING ENGINE</div>
+                    <h1 class="hero-title">SHROMIK QA <span>LEGAL AI</span></h1>
+                    <p class="hero-subtitle">Grounding queries directly against the Bangladesh Labour Act 2006. Zero hallucination, exact section lookup, and citable legal evidence.</p>
+
+                    <!-- Minimal Square Prompt Matrix -->
+                    <div class="prompt-grid">
+                        <div class="prompt-card" onclick="sendPrompt('What is the notice period for terminating a permanent worker under Section 27?')">
+                            <div class="prompt-card-header">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                                <span>SECTION 27 — TERMINATION NOTICE</span>
+                            </div>
+                            <div class="prompt-card-desc">Notice period rules for permanent vs temporary workers under Section 27.</div>
+                        </div>
+                        <div class="prompt-card" onclick="sendPrompt('What are maximum daily working hours for an adult worker under Section 100?')">
+                            <div class="prompt-card-header">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 16 14"></polyline></svg>
+                                <span>SECTION 100 — DAILY HOURS</span>
+                            </div>
+                            <div class="prompt-card-desc">Daily working limits, overtime caps & spread-over limits for factory workers.</div>
+                        </div>
+                        <div class="prompt-card" onclick="sendPrompt('How is annual leave with wages calculated for adult workers in a factory under Section 117?')">
+                            <div class="prompt-card-header">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                                <span>SECTION 117 — ANNUAL LEAVE</span>
+                            </div>
+                            <div class="prompt-card-desc">Annual leave entitlement calculation per 18 days of continuous service.</div>
+                        </div>
+                        <div class="prompt-card" onclick="sendPrompt('What is the procedure for an aggrieved worker to submit a written complaint under Section 33?')">
+                            <div class="prompt-card-header">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                                <span>SECTION 33 — GRIEVANCE COMPLAINT</span>
+                            </div>
+                            <div class="prompt-card-desc">Timelines and Labour Court grievance submission procedures under Section 33.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Feed -->
+                <div class="chat-feed" id="chatFeed"></div>
+            </div>
+
+            <!-- Minimal Sticky Input Bar -->
+            <div class="input-bar">
+                <textarea class="input-field" id="queryInput" placeholder="Ask Shromik QA a question about Bangladesh Labour Law..." rows="1" onkeydown="handleKeyDown(event)"></textarea>
+                <button class="send-btn" id="sendBtn" onclick="submitQuery()" title="Send Question">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const chatFeed = document.getElementById('chatFeed');
+        const queryInput = document.getElementById('queryInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const heroArea = document.getElementById('heroArea');
+        const historyList = document.getElementById('historyList');
+        const mainWrapper = document.getElementById('mainWrapper');
+
+        let sessions = JSON.parse(localStorage.getItem('shromik_qa_chats') || '[]');
+        let activeSessionId = null;
+
+        window.onload = function() {
+            renderHistorySidebar();
+            startNewChat();
+        };
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('collapsed');
+        }
+
+        function startNewChat() {
+            activeSessionId = null;
+            chatFeed.innerHTML = '';
+            heroArea.style.display = 'flex';
+            renderHistorySidebar();
+        }
+
+        function renderHistorySidebar() {
+            historyList.innerHTML = '';
+            sessions.forEach(sess => {
+                const item = document.createElement('div');
+                item.className = `history-item ${sess.id === activeSessionId ? 'active' : ''}`;
+                item.onclick = (e) => {
+                    if (e.target.classList.contains('del-btn')) return;
+                    loadSession(sess.id);
+                };
+
+                item.innerHTML = `
+                    <svg class="history-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                    <span class="history-text">${escapeHtml(sess.title)}</span>
+                    <button class="del-btn" onclick="deleteSession(event, '${sess.id}')" title="Delete Chat">✕</button>
+                `;
+                historyList.appendChild(item);
+            });
+        }
+
+        function loadSession(sessionId) {
+            const sess = sessions.find(s => s.id === sessionId);
+            if (!sess) return;
+
+            activeSessionId = sessionId;
+            chatFeed.innerHTML = '';
+            heroArea.style.display = 'none';
+
+            sess.messages.forEach(msg => {
+                appendMessageToDOM(msg.role, msg.text, msg.chunks, msg.latency);
+            });
+
+            renderHistorySidebar();
+        }
+
+        function deleteSession(e, sessionId) {
+            e.stopPropagation();
+            sessions = sessions.filter(s => s.id !== sessionId);
+            localStorage.setItem('shromik_qa_chats', JSON.stringify(sessions));
+
+            if (activeSessionId === sessionId) {
+                startNewChat();
+            } else {
+                renderHistorySidebar();
+            }
+        }
+
+        function saveCurrentSession(role, text, chunks = [], latency = null) {
+            if (!activeSessionId) {
+                activeSessionId = 'sqa_' + Date.now();
+                const title = text.length > 30 ? text.substring(0, 30) + '...' : text;
+                sessions.unshift({
+                    id: activeSessionId,
+                    title: title,
+                    messages: []
+                });
+            }
+
+            const sess = sessions.find(s => s.id === activeSessionId);
+            if (sess) {
+                sess.messages.push({ role, text, chunks, latency });
+                localStorage.setItem('shromik_qa_chats', JSON.stringify(sessions));
+                renderHistorySidebar();
+            }
+        }
+
+        function handleKeyDown(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                submitQuery();
+            }
+        }
+
+        function sendPrompt(text) {
+            queryInput.value = text;
+            submitQuery();
+        }
+
+        async function submitQuery() {
+            const query = queryInput.value.trim();
+            if (!query) return;
+
+            heroArea.style.display = 'none';
+
+            appendMessageToDOM('user', query);
+            saveCurrentSession('user', query);
+
+            queryInput.value = '';
+            sendBtn.disabled = true;
+            sendBtn.innerHTML = '<div class="spinner"></div>';
+
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ query: query, top_k: 5 })
+                });
+
+                if (!response.ok) throw new Error('API server error');
+                const data = await response.json();
+
+                appendMessageToDOM('assistant', data.answer, data.retrieved_chunks, data.execution_time_ms);
+                saveCurrentSession('assistant', data.answer, data.retrieved_chunks, data.execution_time_ms);
+            } catch (err) {
+                const errText = '⚠️ Error connecting to RAG server. Ensure backend is running at http://127.0.0.1:8000';
+                appendMessageToDOM('assistant', errText);
+                saveCurrentSession('assistant', errText);
+            } finally {
+                sendBtn.disabled = false;
+                sendBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>';
+            }
+        }
+
+        function appendMessageToDOM(role, text, chunks = [], latency = null) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `chat-msg ${role === 'user' ? 'chat-msg-user' : ''}`;
+
+            let roleBadge = role === 'user' 
+                ? `<div class="role-pill user-pill">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    <span>USER</span>
+                   </div>`
+                : `<div class="role-pill assistant-pill">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="12" y1="3" x2="12" y2="21"></line><line x1="4" y1="7" x2="20" y2="7"></line><path d="M4 7L2 13H6L4 7Z"></path><path d="M20 7L18 13H22L20 7Z"></path><circle cx="12" cy="7" r="2" fill="currentColor"></circle></svg>
+                    <span>SHROMIK QA</span>
+                   </div>`;
+
+            let headerHTML = `<div class="msg-role">
+                ${roleBadge}
+                ${latency ? `<span class="latency-tag">${latency}ms</span>` : ''}
+            </div>`;
+
+            let formattedText = text
+                .replace(/\*\*Direct Answer:\*\*/g, '<strong style="color:var(--accent-green); font-size:1.05rem;">Direct Answer:</strong>')
+                .replace(/\*\*Relevant Section\(s\):\*\*/g, '<strong style="color:#A7F3D0;">Relevant Section(s):</strong>')
+                .replace(/\*\*Explanation:\*\*/g, '<strong style="color:#FFFFFF;">Explanation:</strong>')
+                .replace(/\*\*Disclaimer:\*\*/g, '<strong style="color:var(--text-dim); font-size:0.85rem;">Disclaimer:</strong>');
+
+            let chunksHTML = '';
+            if (chunks && chunks.length > 0) {
+                let chunkItems = chunks.map((c, i) => `
+                    <div style="margin-bottom:10px;">
+                        <span class="sec-badge">SECTION ${c.section_number}</span>
+                        <strong style="color:#FAFAFA;">${c.section_title}</strong>
+                        <div style="font-size:0.75rem; color:var(--text-dim); margin:4px 0;">Source: ${c.source_doc} | Method: <code>${c.retrieval_source}</code></div>
+                        <div class="chunk-box">${escapeHtml(c.text)}</div>
+                    </div>
+                `).join('');
+
+                chunksHTML = `
+                    <div class="chunks-expander">
+                        <div class="expander-header" onclick="toggleExpander(this)">
+                            <span>🔎 GROUNDING STATUTORY CONTEXT (${chunks.length} CHUNKS)</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="expander-body" style="display:none;">${chunkItems}</div>
+                    </div>
+                `;
+            }
+
+            msgDiv.innerHTML = headerHTML + `<div class="msg-content">${formattedText}</div>` + chunksHTML;
+            chatFeed.appendChild(msgDiv);
+            
+            mainWrapper.scrollTop = mainWrapper.scrollHeight;
+        }
+
+        function toggleExpander(header) {
+            const body = header.nextElementSibling;
+            const arrow = header.querySelector('span:last-child');
+            if (body.style.display === 'none') {
+                body.style.display = 'flex';
+                arrow.textContent = '▲';
+            } else {
+                body.style.display = 'none';
+                arrow.textContent = '▼';
+            }
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+    </script>
+</body>
+</html>

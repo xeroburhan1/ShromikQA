@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "question": "Can my employer terminate me without notice?",
+    "expected_section": "27",
+    "expected_answer_summary": "Permanent workers must receive a 90-day written notice or pay in lieu of notice. Temporary workers require a 30-day notice if they are monthly rated."
+  },
+  {
+    "id": 2,
+    "question": "How many days of maternity leave am I entitled to?",
+    "expected_section": "46",
+    "expected_answer_summary": "Every female worker is entitled to 16 weeks (112 days) of maternity leave with wages, split as 8 weeks before and 8 weeks after confinement."
+  },
+  {
+    "id": 3,
+    "question": "What is the overtime pay rate?",
+    "expected_section": "108",
+    "expected_answer_summary": "Overtime work is paid at twice the ordinary rate of basic wages and dearness allowance."
+  },
+  {
+    "id": 4,
+    "question": "How is gratuity calculated?",
+    "expected_section": "2",
+    "expected_answer_summary": "Gratuity is calculated as at least 30 days' wages for every completed year of service exceeding six months, or 45 days' wages if service exceeds 10 years."
+  },
+  {
+    "id": 5,
+    "question": "Can I be dismissed for joining a trade union?",
+    "expected_section": "195",
+    "expected_answer_summary": "No, it is an unfair labour practice by the employer to dismiss or threaten to dismiss a worker for trade union activities or membership."
+  },
+  {
+    "id": 6,
+    "question": "What is the legal limit on daily working hours?",
+    "expected_section": "100",
+    "expected_answer_summary": "The standard daily work limit is 8 hours, which can extend to 10 hours with overtime, subject to a weekly limit of 48 hours (extendable to 60 hours)."
+  },
+  {
+    "id": 7,
+    "question": "Am I entitled to a weekly holiday?",
+    "expected_section": "103",
+    "expected_answer_summary": "Every worker in commercial, industrial, or shop establishments is entitled to one and a half days of weekly rest, or one day in factories."
+  },
+  {
+    "id": 8,
+    "question": "How many days of sick leave can I get in a year?",
+    "expected_section": "116",
+    "expected_answer_summary": "A worker is entitled to 14 days of sick leave with full wages in a calendar year, subject to medical certification."
+  },
+  {
+    "id": 9,
+    "question": "What is the minimum age to work in Bangladesh?",
+    "expected_section": "34",
+    "expected_answer_summary": "The minimum age for employment is 14 years. Employing children under 14 is prohibited."
+  },
+  {
+    "id": 10,
+    "question": "What is retrenchment?",
+    "expected_section": "20",
+    "expected_answer_summary": "Retrenchment is termination on grounds of redundancy. Retrenched workers with at least one year of service must get 30 days notice or pay, and 15 days compensation per year."
+  },
+  {
+    "id": 11,
+    "question": "What is the penalty for employing a child worker?",
+    "expected_section": "284",
+    "expected_answer_summary": "Any person employing a child or adolescent in violation of the Act can be fined up to 5,000 Taka."
+  },
+  {
+    "id": 12,
+    "question": "How many festival holidays am I entitled to in a year?",
+    "expected_section": "118",
+    "expected_answer_summary": "Every worker is entitled to 11 days of paid festival holidays in a calendar year."
+  },
+  {
+    "id": 13,
+    "question": "Am I entitled to casual leave? How many days?",
+    "expected_section": "115",
+    "expected_answer_summary": "Every worker is entitled to 10 days of paid casual leave in a calendar year, which is non-accumulative."
+  },
+  {
+    "id": 14,
+    "question": "Can an employer dismiss a worker for misconduct?",
+    "expected_section": "23",
+    "expected_answer_summary": "A worker may be dismissed without notice or pay in lieu of notice if convicted of a criminal offence or found guilty of misconduct."
+  },
+  {
+    "id": 15,
+    "question": "What constitutes misconduct under the Labour Act?",
+    "expected_section": "23",
+    "expected_answer_summary": "Misconduct includes theft, fraud, insubordination, habitual late attendance, neglect of work, and striking in violation of rules."
+  },
+  {
+    "id": 16,
+    "question": "What are the rules for night shift work?",
+    "expected_section": "101",
+    "expected_answer_summary": "If a worker is on a night shift, a holiday of 24 consecutive hours must be provided, and the night shift must end at the standard hours."
+  },
+  {
+    "id": 17,
+    "question": "Within what time must wages be paid after termination?",
+    "expected_section": "123",
+    "expected_answer_summary": "All wages due to a worker whose employment is terminated must be paid within 7 working days from the date of termination."
+  },
+  {
+    "id": 18,
+    "question": "Can wages be deducted for absence from duty?",
+    "expected_section": "126",
+    "expected_answer_summary": "Wages may be deducted for absence from the place of work where the worker is required to work, in proportion to the absence."
+  },
+  {
+    "id": 19,
+    "question": "What is the maximum probation period for a worker?",
+    "expected_section": "4",
+    "expected_answer_summary": "The probation period for a clerk is six months, and for other workers, it is three months."
+  },
+  {
+    "id": 20,
+    "question": "What is the composition of the Labour Court?",
+    "expected_section": "214",
+    "expected_answer_summary": "A Labour Court consists of a Chairman (a District Judge) and two members representing employers and workers respectively."
+  },
+  {
+    "id": 21,
+    "question": "Are apprentices entitled to full benefits?",
+    "expected_section": "18",
+    "expected_answer_summary": "Apprentices are trainees who receive an allowance and are governed by the specific terms of apprenticeship under Chapter II."
+  },
+  {
+    "id": 22,
+    "question": "What happens if a worker dies while in service?",
+    "expected_section": "19",
+    "expected_answer_summary": "If a worker who has been in continuous service for at least 2 years dies, the employer must pay 30 days' wages (or 45 days' if service exceeds 10 years) for each year of service to the dependents."
+  },
+  {
+    "id": 23,
+    "question": "Can women work night shifts in factories?",
+    "expected_section": "109",
+    "expected_answer_summary": "Women workers cannot be employed in any factory or commercial establishment between 10 PM and 6 AM without their explicit consent."
+  },
+  {
+    "id": 24,
+    "question": "How is annual leave calculated for factory workers?",
+    "expected_section": "117",
+    "expected_answer_summary": "Factory workers are entitled to 1 day of paid leave for every 18 days of work in the previous calendar year."
+  },
+  {
+    "id": 25,
+    "question": "What is the maximum limit on overtime hours?",
+    "expected_section": "100",
+    "expected_answer_summary": "Overtime is limited to 2 hours per day, and a worker must not work more than 60 hours in any week, with a yearly average of 56 hours."
+  },
+  {
+    "id": 26,
+    "question": "How are trade union registrations cancelled?",
+    "expected_section": "190",
+    "expected_answer_summary": "The Registrar may cancel the registration of a trade union if it fails to comply with requirements, has ceased to exist, or violates provisions, subject to Labour Court approval."
+  },
+  {
+    "id": 27,
+    "question": "Are employers required to provide clean drinking water?",
+    "expected_section": "58",
+    "expected_answer_summary": "In every establishment, effective arrangements must be made to provide and maintain a sufficient supply of wholesome drinking water."
+  },
+  {
+    "id": 28,
+    "question": "What is a service book?",
+    "expected_section": "6",
+    "expected_answer_summary": "Every employer must maintain a service book for every worker they employ, containing details of employment, wages, and conduct."
+  },
+  {
+    "id": 29,
+    "question": "Is an employer required to issue an appointment letter?",
+    "expected_section": "5",
+    "expected_answer_summary": "No employer can employ any worker without giving them an appointment letter and an identity card with a photograph."
+  },
+  {
+    "id": 30,
+    "question": "What is lay-off?",
+    "expected_section": "16",
+    "expected_answer_summary": "Lay-off is the failure or refusal of an employer to give employment due to shortage of coal, power, raw materials, accumulation of stock, or breakdown of machinery. Laid-off workers are entitled to 50% basic wages."
+  }
+]
